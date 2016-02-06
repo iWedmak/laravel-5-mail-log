@@ -18,13 +18,12 @@ class MailLogServiceProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('maillog.php'),
-        ]);
+            __DIR__.'/config/config.php' => config_path('maillog.php')
+        ], 'config');
+
         // Register commands
         $this->commands('command.maillog.migration');
         
-        // Register blade directives
-        $this->bladeDirectives();
     }
     /**
      * Register the service provider.
@@ -33,9 +32,7 @@ class MailLogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerEntrust();
         $this->registerCommands();
-        $this->mergeConfig();
     }
     /**
      * Register the artisan commands.
@@ -47,12 +44,6 @@ class MailLogServiceProvider extends ServiceProvider
         $this->app->singleton('command.maillog.migration', function ($app) {
             return new MigrationCommand();
         });
-    }
-    private function mergeConfig()
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'maillog'
-        );
     }
     /**
      * Get the services provided.
