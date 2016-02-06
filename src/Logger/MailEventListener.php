@@ -16,13 +16,13 @@ class MailEventListener
 		}
 	}
 
-	public function onSend($message)
+	public function onSend($event)
 	{
+		$message=$event->message;
 		$body=$message->getBody();
 		$subject=$message->getSubject();
         $to=key($message->getTo());
         @$bcc=key($message->getBcc());
-        pre('some');
         if(isset($bcc) && !empty($bcc) && ( $bcc==\Config::get('maillog.bcc') ))
         {
             
