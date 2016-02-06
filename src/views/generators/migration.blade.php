@@ -19,7 +19,7 @@ class MailLogSetupTables extends Migration
             $table->text('subject');
             $table->longText('body');
             $table->boolean('read')->default(false);
-            $table->integer('attemt');
+            $table->integer('attempt');
             $table->timestamps();
             $table->softDeletes();
         });
