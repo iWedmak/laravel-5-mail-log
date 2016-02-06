@@ -25,10 +25,10 @@ class MailLogServiceProvider extends ServiceProvider
         
         // Register route
         if (! $this->app->routesAreCached()) {
-            Route::get('/mail/{id}.jpg', 
+            \Route::get('/mail/{id}.jpg', 
                 function ($id) 
                 {
-                    Event::fire(new MessageRead($id));
+                    \Event::fire(new MessageRead($id));
                 }
             )->name('MailRead')->pattern('id', '[0-9]+');
         }
