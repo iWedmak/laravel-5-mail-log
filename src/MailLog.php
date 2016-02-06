@@ -1,4 +1,4 @@
-<?php namespace iWedmak\MailLoger;
+<?php namespace iWedmak\Mail;
 
 class MailLoger
 {
@@ -14,7 +14,7 @@ class MailLoger
 	{
 		try
 		{
-			$mailLog=$this->model::where('id', $id)->firstOrFail();
+			$mailLog=MailLog::where('id', $id)->firstOrFail();
 			$mailLog->read=true;
 			$mailLog->save();
 		}
@@ -36,7 +36,7 @@ class MailLoger
         }
         else
         {
-			$mailLog=$this->model::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->first();
+			$mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->first();
 			if(isset($mailLog['id']) && !empty($mailLog['id']))
 			{
 				$message->setTo(array());
@@ -60,7 +60,7 @@ class MailLoger
 			}
 			else
 			{
-				$mailLog=new $this->model;
+				$mailLog=new MailLog;
 				$mailLog->to=$to;
 				$mailLog->subject=$subject;
 				$mailLog->body=strip_tags($body);

@@ -1,4 +1,4 @@
-<?php namespace iWedmak\MailLoger;
+<?php namespace iWedmak\Mail;
 /**
  * This file is part of Entrust,
  * a role & permission management solution for Laravel.

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class EntrustSetupTables extends Migration
+class MailLogSetupTables extends Migration
 {
     /**
      * Run the migrations.

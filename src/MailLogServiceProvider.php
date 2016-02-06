@@ -1,4 +1,4 @@
-<?php namespace iWedmak\MailLoger;
+<?php namespace iWedmak\Mail;
 
 use Illuminate\Support\ServiceProvider;
 class MailLogServiceProvider extends ServiceProvider
