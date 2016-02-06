@@ -19,7 +19,7 @@
             "src/commands"
         ],
         "psr-0": {
-            "iWedmak\MailLoger": "src/"
+            "iWedmak\\MailLoger": "src/"
         }
     }
 }
