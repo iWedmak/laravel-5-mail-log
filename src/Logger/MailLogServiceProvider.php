@@ -30,7 +30,7 @@ class MailLogServiceProvider extends ServiceProvider
                 {
                     \Event::fire(new MessageRead($id));
                 }
-            )->name('MailRead')->pattern('id', '[0-9]+');
+            )->name('MailRead')->where(['id' => '[0-9]+']);
         }
         
     }
