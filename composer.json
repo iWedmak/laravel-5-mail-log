@@ -9,7 +9,6 @@
             "email": "iwedmak@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.5.0",
         "illuminate/database": "~5.0"
