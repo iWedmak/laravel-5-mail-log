@@ -18,7 +18,7 @@
             "src/commands"
             "src/Logger"
         ],
-        "psr-4": {
+        "psr-0": {
             "iWedmak\\Mail\\": "src/"
         }
     }
