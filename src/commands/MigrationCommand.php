@@ -60,9 +60,10 @@ class MigrationCommand extends Command
      */
     protected function createMigration($logTable)
     {
+        \Blade::setContentTags("{{", "}}");
+        \Blade::setEscapedContentTags("{{{", "}}}");
         $migrationFile = base_path("/database/migrations")."/".date('Y_m_d_His')."_maillog_setup_tables.php";
-        $data = compact('logTable');
-        $output = $this->laravel->view->make('maillog::generators.migration')->with($data)->render();
+        $output = $this->laravel->view->make('maillog::generators.migration')->with(['logTable'=>$logTable])->render();
         if (!file_exists($migrationFile) && $fs = fopen($migrationFile, 'x')) {
             fwrite($fs, $output);
             fclose($fs);
