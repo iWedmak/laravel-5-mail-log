@@ -30,7 +30,7 @@ class MigrationCommand extends Command
     public function fire()
     {
         $this->laravel->view->addNamespace('maillog', substr(__DIR__, 0, -8).'views');
-        $rolesTable          = Config::get('maillog.log_table');
+        $logTable          = Config::get('maillog.log_table');
         $this->line('');
         $this->info( "Table: $logTable" );
         $message = "A migration that creates '$logTable'".
