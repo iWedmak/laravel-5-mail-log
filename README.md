@@ -16,3 +16,12 @@ Register provider, add this to config/app.php in providers array:
 ```php
 iWedmak\Mail\MailLogServiceProvider::class,
 ```
+After that u will need to publish config
+```bash
+php artisan vendor:publish
+```
+and publish migrations and migrate
+``` bash
+php artisan maillog:migration
+php artisan migrate
+```
