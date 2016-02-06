@@ -16,6 +16,7 @@
     "autoload": {
         "classmap": [
             "src/commands"
+            "src/Logger"
         ],
         "psr-0": {
             "iWedmak\\Mail\\": "src/Logger"
