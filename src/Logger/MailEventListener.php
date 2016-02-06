@@ -2,11 +2,11 @@
 
 class MailEventListener
 {
-	public function onRead($id)
+	public function onRead($event)
 	{
 		try
 		{
-			$mailLog=MailLog::where('id', $id)->firstOrFail();
+			$mailLog=MailLog::where('id', $event->id)->firstOrFail();
 			$mailLog->read=true;
 			$mailLog->save();
 		}
@@ -54,6 +54,11 @@ class MailEventListener
         $events->listen(
             'Illuminate\Mail\Events\MessageSending',
             'iWedmak\Mail\MailEventListener@onSend'
+        );
+        
+        $events->listen(
+            'iWedmak\Mail\MessageRead',
+            'iWedmak\Mail\MailEventListener@onRead'
         );
     }
 }

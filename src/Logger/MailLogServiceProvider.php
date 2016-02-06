@@ -20,9 +20,18 @@ class MailLogServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path('maillog.php')
         ], 'config');
-
         // Register commands
         $this->commands('command.maillog.migration');
+        
+        // Register route
+        if (! $this->app->routesAreCached()) {
+            Route::get('/mail/{id}.jpg', 
+                function ($id) 
+                {
+                    Event::fire(new MessageRead($id));
+                }
+            )->name('MailRead')->pattern('id', '[0-9]+');
+        }
         
     }
     /**
