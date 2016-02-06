@@ -25,3 +25,9 @@ and publish migrations and migrate
 php artisan maillog:migration
 php artisan migrate
 ```
+Now we can subscribe to mailsend event, by adding to `app/Providers/EventServiceProvider.php` 
+```php
+protected $subscribe = [
+    'iWedmak\Mail\MailEventListener',
+];
+```
