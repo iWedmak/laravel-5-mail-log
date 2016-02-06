@@ -18,7 +18,7 @@ class MailLogServiceProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/config/config.php' => config_path('maillog.php')
+            __DIR__.'/../config/config.php' => config_path('maillog.php')
         ], 'config');
 
         // Register commands
