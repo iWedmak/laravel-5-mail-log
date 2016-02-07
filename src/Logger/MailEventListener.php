@@ -1,5 +1,7 @@
 <?php namespace iWedmak\Mail;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class MailEventListener
 {
 	public function onRead($event)
@@ -29,24 +31,35 @@ class MailEventListener
         }
         else
         {
-			$mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->first();
-			if(isset($mailLog['id']) && !empty($mailLog['id']))
-			{
-				$message->setTo(array());
-                $mailLog->increment('attempt');
-			}
-			else
-			{
-				$mailLog=new MailLog;
+            try
+            {
+                $mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->firstOrFail();
+                if(isset($bcc) && !empty($bcc) && ( $bcc==\Config::get('maillog.bcc_delay') ) && $mailLog['sended_at']>strtotime('- '.\Config::get('maillog.delay').' minutes'))
+                {
+                    $mailLog->sended_at=strtotime('now');
+                }
+                else
+                {
+                    $message->setTo([]);
+                    $message->setBody('');
+                    $message->setFrom([]);
+                }
+                $mailLog->attempt+=1;
+                $mailLog->save();
+            }
+            catch(ModelNotFoundException $e)
+            {
+                $mailLog=new MailLog;
 				$mailLog->to=$to;
 				$mailLog->subject=$subject;
 				$mailLog->body=strip_tags($body);
+				$mailLog->sended_at=strip_tags($body);
 				$mailLog->save();
 				$body=$body.'<img src="'.\URL::route('MailRead', $mailLog['id']).'" height="1px" width="1px">';
 				$message->setBody($body);
-			}
+            }
 		}
-		$message->setBcc(array());
+		$message->setBcc([]);
 	}
 
 	public function subscribe($events)

@@ -20,6 +20,7 @@ class MailLogSetupTables extends Migration
             $table->longText('body');
             $table->boolean('read')->default(false);
             $table->integer('attempt');
+            $table->dateTime('sended_at');
             $table->timestamps();
             $table->softDeletes();
         });

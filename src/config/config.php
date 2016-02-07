@@ -27,11 +27,20 @@ return [
     'delay' => 30,
     /*
     |--------------------------------------------------------------------------
+    | MailLog delay email
+    |--------------------------------------------------------------------------
+    |
+    | Dilay email, so email duplicates will come in delay
+    |
+    */
+    'bcc_delay' => 'delay@me.com',
+    /*
+    |--------------------------------------------------------------------------
     | Maillog Skeep Address
     |--------------------------------------------------------------------------
     |
     | Addres in bcc to skeep logging in db
     |
     */
-    'bcc' => 'skeep@me.com',
+    'bcc_skeep' => 'skeep@me.com',
 ];
