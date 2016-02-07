@@ -21,7 +21,7 @@ return [
     | MailLog delay
     |--------------------------------------------------------------------------
     |
-    | Dilay period in minutes for email's duplicates
+    | Delay period in minutes for email's duplicates
     |
     */
     'delay' => 30,
