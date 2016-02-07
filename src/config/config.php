@@ -12,7 +12,7 @@ return [
     | MailLog Table
     |--------------------------------------------------------------------------
     |
-    | Where to store emails
+    | Where to store emails, change before migration
     |
     */
     'log_table' => 'maillog',
