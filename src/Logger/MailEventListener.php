@@ -34,9 +34,9 @@ class MailEventListener
             try
             {
                 $mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->firstOrFail();
-                if(isset($bcc) && !empty($bcc) && ( $bcc==\Config::get('maillog.bcc_delay') ) && $mailLog['sended_at']>strtotime('- '.\Config::get('maillog.delay').' minutes'))
+                if(isset($bcc) && !empty($bcc) && ( $bcc==\Config::get('maillog.bcc_delay') ) && strtotime($mailLog['sended_at'])>strtotime('- '.\Config::get('maillog.delay').' minutes'))
                 {
-                    $mailLog->sended_at=strtotime('now');
+                    $mailLog->sended_at=date('Y-m-d H:i:s', time());
                 }
                 else
                 {
@@ -53,7 +53,7 @@ class MailEventListener
 				$mailLog->to=$to;
 				$mailLog->subject=$subject;
 				$mailLog->body=strip_tags($body);
-				$mailLog->sended_at=strip_tags($body);
+				$mailLog->sended_at=date('Y-m-d H:i:s', time());
 				$mailLog->save();
 				$body=$body.'<img src="'.\URL::route('MailRead', $mailLog['id']).'" height="1px" width="1px">';
 				$message->setBody($body);
