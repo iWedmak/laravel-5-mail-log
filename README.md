@@ -1,4 +1,6 @@
 # laravel-5-mail-log
+Logs every email sended by laravel (via Mail class include queued mails), preventing duplicates, u can override this by adding in bcc `skeep@me.com` or u can limit frequency (by default 30 minutes) of duplicates by adding in bcc `delay@me.com` (this can be changed in config file)
+Monitors email reads, have event MessageRead.
 * install
 ```bash
 composer require iwedmak/mail-log
@@ -25,9 +27,11 @@ and publish migrations and migrate
 php artisan maillog:migration
 php artisan migrate
 ```
+
 Now we can subscribe to mailsend event, by adding to `app/Providers/EventServiceProvider.php` 
 ```php
 protected $subscribe = [
     'iWedmak\Mail\MailEventListener',
 ];
 ```
+Now u have one more event, it's `iWedmak\Mail\MessageRead` when email was read.
