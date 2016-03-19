@@ -1,0 +1,25 @@
+{
+    "name": "iwedmak/mail-log",
+    "description": "Log emails in laravel 5",
+    "keywords": ["laravel","illuminate","mail","maillog"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "iWedmak Om",
+            "email": "iwedmak@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/database": "~5.0",
+        "laravel/framework": "5.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/commands"
+        ],
+        "psr-4": {
+            "iWedmak\\Mail\\": "src/Logger/"
+        }
+    }
+}
