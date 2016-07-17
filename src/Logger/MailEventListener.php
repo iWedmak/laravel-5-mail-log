@@ -47,7 +47,7 @@ class MailEventListener
                 }
                 else
                 {
-                    $message->setTo([]);
+                    $message->setTo('null@null');
                     $message->setBody('');
                     $message->setFrom([]);
                 }
