@@ -25,7 +25,7 @@ class MailEventListener
 		$subject=$message->getSubject();
         $to=key($message->getTo());
         @$bcc=key($message->getBcc());
-        if(isset($bcc) && !empty($bcc) && $bcc==\Config::get('maillog.bcc'))
+        if(isset($bcc) && !empty($bcc) && $bcc==\Config::get('maillog.bcc_skeep'))
         {
             
         }
