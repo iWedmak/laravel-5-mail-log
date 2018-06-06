@@ -34,6 +34,7 @@ class MailEventListener
             try
             {
                 $mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->firstOrFail();
+				$mailLog->attempt+=1;
                 if
                     (
                         isset($bcc) && !empty($bcc) 
@@ -44,15 +45,13 @@ class MailEventListener
                     )
                 {
                     $mailLog->sended_at=date('Y-m-d H:i:s', time());
+					$mailLog->save();
                 }
                 else
                 {
-                    $message->setTo('null@null');
-                    $message->setBody('');
-                    $message->setFrom([]);
+                    $mailLog->save();
+                    return false;
                 }
-                $mailLog->attempt+=1;
-                $mailLog->save();
             }
             catch(ModelNotFoundException $e)
             {
