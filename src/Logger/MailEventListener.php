@@ -31,9 +31,10 @@ class MailEventListener
         }
         else
         {
+            $hash=hash('md5',$body);
             try
             {
-                $mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', strip_tags($body))->firstOrFail();
+                $mailLog=MailLog::where('to', $to)->where('subject', $subject)->where('body', $hash)->firstOrFail();
 				$mailLog->attempt+=1;
                 if
                     (
@@ -58,7 +59,7 @@ class MailEventListener
                 $mailLog=new MailLog;
 				$mailLog->to=$to;
 				$mailLog->subject=$subject;
-				$mailLog->body=strip_tags($body);
+				$mailLog->body=$hash;
 				$mailLog->sended_at=date('Y-m-d H:i:s', time());
 				$mailLog->save();
 				$body=$body.'<img src="'.\URL::route('MailRead', $mailLog['id']).'" height="1px" width="1px">';
